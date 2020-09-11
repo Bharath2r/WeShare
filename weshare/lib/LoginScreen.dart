@@ -1,22 +1,35 @@
 import 'package:flutter/material.dart';
 
 class Login extends StatefulWidget {
-  Login({Key key, this.title}) : super(key: key);
+  Login({Key key, this.title, this.isComingSignUp}) : super(key: key);
 
   final String title;
+  final bool isComingSignUp;
 
   @override
-  LoginPage createState() => LoginPage();
+  LoginPage createState() => LoginPage(isComingSignUp: this.isComingSignUp);
 }
 
 class LoginPage extends State<Login> {
   var otpVisibility = false;
   var verifyButtonVisiblity = false;
   var loginButtonVisiblity = true;
+  bool isComingSignUp;
+  LoginPage({this.isComingSignUp});
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return WillPopScope(
+        // ignore: missing_return
+        onWillPop: () {
+          if (isComingSignUp == true) {
+            Navigator.popUntil(context, ModalRoute.withName(Navigator.defaultRouteName));
+          }else {
+            Navigator.pop(context, true);
+            print("signup $isComingSignUp");
+          }
+        },
+          child: Scaffold(
         appBar: AppBar(
           title: Text("Login"),
           backgroundColor: _colorFromHex("#fc8019"),
@@ -80,11 +93,24 @@ class LoginPage extends State<Login> {
             ],
           ),
         )) // This trailing comma makes auto-formatting nicer for build methods.
-        );
+        ));
   }
+
+  Future<bool> _onWillPop() async {
+    return true;
+  }
+
+
 }
 
 Color _colorFromHex(String hexColor) {
   final hexCode = hexColor.replaceAll('#', '');
   return Color(int.parse('FF$hexCode', radix: 16));
+}
+
+class ScreenArguments {
+  final String title;
+  final String message;
+
+  ScreenArguments(this.title, this.message);
 }
