@@ -3,7 +3,8 @@ import 'dart:convert';
 import 'package:http/http.dart';
 
 class HttpService {
-  final String postUrl = "https://cloud.voltuswave.com";
+  final String postUrl = "";
+
   Future<Map> getData(urlStr) async {
     Response res = await get(urlStr);
 

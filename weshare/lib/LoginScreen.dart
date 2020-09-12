@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:weshare/GlobalVariable.dart';
+import 'package:weshare/HomeScreen.dart';
 
 class Login extends StatefulWidget {
   Login({Key key, this.title, this.isComingSignUp}) : super(key: key);
@@ -11,10 +13,19 @@ class Login extends StatefulWidget {
 }
 
 class LoginPage extends State<Login> {
-  var otpVisibility = false;
-  var verifyButtonVisiblity = false;
+  var verifyFieldButtonVisiblity = false;
   var loginButtonVisiblity = true;
   bool isComingSignUp;
+
+  bool mobileValidateBool = true;
+  bool otpValidateBool = true;
+
+  String mobileErrorMsg;
+  String otpErrorMsg;
+
+  TextEditingController mobileController = new TextEditingController();
+  TextEditingController otpController = new TextEditingController();
+
   LoginPage({this.isComingSignUp});
 
   @override
@@ -24,88 +35,161 @@ class LoginPage extends State<Login> {
         onWillPop: () {
           if (isComingSignUp == true) {
             Navigator.popUntil(context, ModalRoute.withName(Navigator.defaultRouteName));
-          }else {
+          } else {
             Navigator.pop(context, true);
             print("signup $isComingSignUp");
           }
         },
-          child: Scaffold(
-        appBar: AppBar(
-          title: Text("Login"),
-          backgroundColor: _colorFromHex("#fc8019"),
-        ),
-        body: Center(
-            child: Card(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
+        child: Scaffold(
+            resizeToAvoidBottomPadding: false,
+            appBar: AppBar(
+              title: Text("Login"),
+              backgroundColor: GlobalVariable.colorFromHex("#fc8019"),
+            ),
+            body: Container(
+                child: Column(children: <Widget>[
               Container(
-                  margin: EdgeInsets.only(bottom: 15),
-                  child: TextField(
-                    keyboardType: TextInputType.number,
-                    decoration: InputDecoration(
-                        labelText: 'Enter Mobile Number',
-                        border: OutlineInputBorder(
-                            borderRadius: BorderRadius.all(Radius.circular(5)),
-                            borderSide:
-                                BorderSide(width: 1.0, color: Colors.grey)),
-                        hintText: "Enter Mobile Number"),
-                  )),
-              Visibility(
-                  visible: otpVisibility,
-                  child: TextField(
-                    keyboardType: TextInputType.number,
-                    decoration: InputDecoration(
-                        border: OutlineInputBorder(
-                            borderRadius: BorderRadius.all(Radius.circular(5)),
-                            borderSide:
-                                BorderSide(width: 1.0, color: Colors.grey)),
-                        hintText: "One Time Password"),
-                  )),
-              Visibility(
-                  visible: loginButtonVisiblity,
-                  child: SizedBox(
-                      width: 200,
-                      child: Container(
-                          margin: EdgeInsets.only(top: 35),
-                          child: RaisedButton(
-                            onPressed: () => {
-                              setState(() {
-                                otpVisibility = true;
-                                loginButtonVisiblity = false;
-                                verifyButtonVisiblity = true;
-                              })
-                            },
-                            child: Text("Login"),
-                            color: _colorFromHex("#fc8019"),
-                          )))),
-              Visibility(
-                  visible: verifyButtonVisiblity,
-                  child: SizedBox(
-                      width: 200,
-                      child: Container(
-                          margin: EdgeInsets.only(top: 35),
-                          child: RaisedButton(
-                            onPressed: () => {setState(() {})},
-                            child: Text("Verify OTP"),
-                            color: _colorFromHex("#fc8019"),
-                          ))))
-            ],
-          ),
-        )) // This trailing comma makes auto-formatting nicer for build methods.
-        ));
+                margin: EdgeInsets.fromLTRB(0, 80, 0, 130),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Text("We",
+                        textAlign: TextAlign.center,
+                        style: TextStyle(
+                          fontSize: 60.0,
+                          fontWeight: FontWeight.bold,
+                          color: GlobalVariable.colorFromHex("#000000"),
+                        )),
+                    Text("Share",
+                        textAlign: TextAlign.center,
+                        style: TextStyle(
+                          fontSize: 60.0,
+                          fontWeight: FontWeight.bold,
+                          color: GlobalVariable.colorFromHex("#fc8019"),
+                        ))
+                  ],
+                ),
+              ),
+              Center(
+                  child: Container(
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Container(
+                        margin: EdgeInsets.fromLTRB(15.0,0, 15.0,5.0),
+                        child: TextField(
+                          enabled: loginButtonVisiblity,
+                          keyboardType: TextInputType.phone,
+                          controller: mobileController,
+                          onTap: () => {
+                            setState(() {
+                              mobileValidateBool = true;
+                            })
+                          },
+                          decoration: InputDecoration(
+                            labelText: 'Enter Mobile Number',
+                            errorText: mobileValidateBool ? null : mobileErrorMsg,
+                            focusedBorder: OutlineInputBorder(
+                                borderRadius: BorderRadius.all(Radius.circular(5)), borderSide: BorderSide(width: 1.0, color: GlobalVariable.colorFromHex("#fc8019"))),
+                            border: OutlineInputBorder(
+                                borderRadius: BorderRadius.all(Radius.circular(5)), borderSide: BorderSide(width: 1.0, color: Colors.grey)),
+                          ),
+                        )),
+                    Visibility(
+                        visible: verifyFieldButtonVisiblity,
+                        child: Container(
+                            margin: EdgeInsets.fromLTRB(15.0,5.0, 15.0,0),
+                            child: TextField(
+                              keyboardType: TextInputType.number,
+                              controller: otpController,
+                              onTap: () => {
+                                setState(() {
+                                  otpValidateBool = true;
+                                })
+                              },
+                              decoration: InputDecoration(
+                                labelText: 'One Time Password',
+                                errorText: otpValidateBool ? null : otpErrorMsg,
+                                focusedBorder: OutlineInputBorder(
+                                    borderRadius: BorderRadius.all(Radius.circular(5)), borderSide: BorderSide(width: 1.0, color: GlobalVariable.colorFromHex("#fc8019"))),
+                                border: OutlineInputBorder(
+                                    borderRadius: BorderRadius.all(Radius.circular(5)), borderSide: BorderSide(width: 1.0, color: Colors.grey)),
+                              ),
+                            ))),
+                    Visibility(
+                        visible: loginButtonVisiblity,
+                        child: SizedBox(
+                            width: 200,
+                            child: Container(
+                                margin: EdgeInsets.only(top: 35),
+                                child: RaisedButton(
+                                  onPressed: () => {
+                                    setState(() {
+                                      if (mobileController.text.isEmpty) {
+                                        mobileValidateBool = false;
+                                        mobileErrorMsg = "Please enter mobile number";
+                                      } else {
+                                        mobileValidateBool = GlobalVariable.validatemobilenumber(mobileController.text);
+                                        if (!mobileValidateBool) {
+                                          mobileErrorMsg = "Please enter validate number";
+                                        } else {
+                                          verifyFieldButtonVisiblity = true;
+                                          loginButtonVisiblity = false;
+                                        }
+                                      }
+                                    })
+                                  },
+                                  child: Text("Login"),
+                                  color: GlobalVariable.colorFromHex("#fc8019"),
+                                )))),
+                    Visibility(
+                        visible: verifyFieldButtonVisiblity,
+                        child: SizedBox(
+                            width: 200,
+                            child: Container(
+                                margin: EdgeInsets.only(top: 35),
+                                child: RaisedButton(
+                                  onPressed: () => {
+                                    setState(() {
+                                      if (otpController.text.isEmpty) {
+                                        otpValidateBool = false;
+                                        otpErrorMsg = "Please enter OTP";
+                                      } else {
+                                        otpValidateBool = otpValidation(otpController.text);
+                                        if (!otpValidateBool) {
+                                          otpErrorMsg = "Please enter valid code";
+                                        } else {
+                                          Navigator.pushAndRemoveUntil(
+                                            context,
+                                            MaterialPageRoute(builder: (context) => Home()),
+                                            (Route<dynamic> route) => false,
+                                          );
+                                        }
+                                      }
+                                    })
+                                  },
+                                  child: Text("Verify OTP"),
+                                  color: GlobalVariable.colorFromHex("#fc8019"),
+                                ))))
+                  ],
+                ),
+              ))
+            ])) // This trailing comma makes auto-formatting nicer for build methods.
+            ));
   }
 
   Future<bool> _onWillPop() async {
     return true;
   }
-
-
 }
 
-Color _colorFromHex(String hexColor) {
-  final hexCode = hexColor.replaceAll('#', '');
-  return Color(int.parse('FF$hexCode', radix: 16));
+bool otpValidation(String mobiletext) {
+  final regexpmobilevalid = RegExp("^[0-9]{6}\$");
+
+  if (regexpmobilevalid.hasMatch(mobiletext)) {
+    return true;
+  }
+  return false;
 }
 
 class ScreenArguments {

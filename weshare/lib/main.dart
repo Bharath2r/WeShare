@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:weshare/GlobalVariable.dart';
 
 import 'LoginScreen.dart';
 import 'SignupScreen.dart';
@@ -12,6 +13,12 @@ class App extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'WeShare',
+      theme: ThemeData(
+          primaryColor: Colors.white,
+          inputDecorationTheme: const InputDecorationTheme(
+            labelStyle: TextStyle(color: Colors.black),
+            hintStyle: TextStyle(color: Colors.grey),
+          )),
       home: MyHomePage(),
     );
   }
@@ -33,30 +40,49 @@ class _MyHomePageState extends State<MyHomePage> {
       body: Container(
           child: Column(children: <Widget>[
         Container(
-            margin: EdgeInsets.fromLTRB(0, 100, 0, 200),
-            child: Text("WeShare"),),
+          margin: EdgeInsets.fromLTRB(0, 100, 0, 200),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Text("We",
+                  textAlign: TextAlign.center,
+                  style: TextStyle(
+                    fontSize: 60.0,
+                    fontWeight: FontWeight.bold,
+                    color: GlobalVariable.colorFromHex("#000000"),
+                  )),
+              Text("Share",
+                  textAlign: TextAlign.center,
+                  style: TextStyle(
+                    fontSize: 60.0,
+                    fontWeight: FontWeight.bold,
+                    color: GlobalVariable.colorFromHex("#fc8019"),
+                  ))
+            ],
+          ),
+        ),
         Center(
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
-              SizedBox(
-                  width: 200,
+              Container(
+                  margin: EdgeInsets.only(bottom: 10.0),
+                  height: 40,
+                  width: 250,
                   child: RaisedButton(
-                    onPressed: () => {
-                    Navigator.of(context).push(MaterialPageRoute(builder: (context) => Login()))
-                    },
+                    onPressed: () => {Navigator.of(context).push(MaterialPageRoute(builder: (context) => Login()))},
                     child: Text("Login"),
-                    color: _colorFromHex("#fc8019"),
+                    color: GlobalVariable.colorFromHex("#fc8019"),
                   )),
-              SizedBox(
-                  width: 200,
+              Container(
+                  margin: EdgeInsets.only(top: 10.0),
+                  height: 40,
+                  width: 250,
                   child: RaisedButton(
-                    onPressed: () => {
-                    Navigator.of(context).push(MaterialPageRoute(builder: (context) => Signup()))
-                    },
+                    onPressed: () => {Navigator.of(context).push(MaterialPageRoute(builder: (context) => Signup()))},
                     child: Text("Sign up"),
                     textColor: Colors.white,
-                    color: _colorFromHex("#000000"),
+                    color: GlobalVariable.colorFromHex("#000000"),
                   ))
             ],
           ),
@@ -64,9 +90,4 @@ class _MyHomePageState extends State<MyHomePage> {
       ])), // This trailing comma makes auto-formatting nicer for build methods.
     );
   }
-}
-
-Color _colorFromHex(String hexColor) {
-  final hexCode = hexColor.replaceAll('#', '');
-  return Color(int.parse('FF$hexCode', radix: 16));
 }

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:weshare/GlobalVariable.dart';
 
 import 'LoginScreen.dart';
 
@@ -35,7 +36,7 @@ class SignupPage extends State<Signup> {
     return Scaffold(
         appBar: AppBar(
           title: Text("SignUp"),
-          backgroundColor: _colorFromHex("#fc8019"),
+          backgroundColor: GlobalVariable.colorFromHex("#fc8019"),
         ),
         body: Container(
           margin: EdgeInsets.only(top: 20, left: 10, right: 10),
@@ -54,12 +55,11 @@ class SignupPage extends State<Signup> {
                     decoration: InputDecoration(
                         labelText: 'Enter FirstName',
 //                        errorStyle: TextStyle(),
-                        errorText:
-                            firstNameValidate ? 'Please enter firstname' : null,
+                        errorText: firstNameValidate ? 'Please enter firstname' : null,
+                        focusedBorder: OutlineInputBorder(
+                            borderRadius: BorderRadius.all(Radius.circular(5)), borderSide: BorderSide(width: 1.0, color: GlobalVariable.colorFromHex("#fc8019"))),
                         border: OutlineInputBorder(
-                            borderRadius: BorderRadius.all(Radius.circular(5)),
-                            borderSide:
-                                BorderSide(width: 1.0, color: Colors.grey)),
+                            borderRadius: BorderRadius.all(Radius.circular(5)), borderSide: BorderSide(width: 1.0, color: Colors.grey)),
                         hintText: "Enter FirstName"),
                   )),
               Container(
@@ -71,30 +71,27 @@ class SignupPage extends State<Signup> {
                     onSubmitted: (_) => FocusScope.of(context).nextFocus(),
                     decoration: InputDecoration(
                         labelText: 'Enter LastName',
-                        errorText:
-                            lastNameValidate ? 'Please enter lastname' : null,
+                        errorText: lastNameValidate ? 'Please enter lastname' : null,
+                        focusedBorder: OutlineInputBorder(
+                            borderRadius: BorderRadius.all(Radius.circular(5)), borderSide: BorderSide(width: 1.0, color: GlobalVariable.colorFromHex("#fc8019"))),
                         border: OutlineInputBorder(
-                            borderRadius: BorderRadius.all(Radius.circular(5)),
-                            borderSide:
-                                BorderSide(width: 1.0, color: Colors.grey)),
+                            borderRadius: BorderRadius.all(Radius.circular(5)), borderSide: BorderSide(width: 1.0, color: Colors.grey)),
                         hintText: "Enter LastName"),
                   )),
               Container(
                   margin: EdgeInsets.only(bottom: 15),
                   child: TextField(
-                    keyboardType: TextInputType.numberWithOptions(
-                        signed: true, decimal: true),
+                    keyboardType: TextInputType.numberWithOptions(signed: true, decimal: true),
                     textInputAction: TextInputAction.next,
                     controller: contactNumber,
                     onSubmitted: (_) => FocusScope.of(context).nextFocus(),
                     decoration: InputDecoration(
                         labelText: 'Enter ContactNumber',
-                        errorText:
-                            contactNumberValidate ? contactNumberMsg : null,
+                        errorText: contactNumberValidate ? contactNumberMsg : null,
+                        focusedBorder: OutlineInputBorder(
+                            borderRadius: BorderRadius.all(Radius.circular(5)), borderSide: BorderSide(width: 1.0, color: GlobalVariable.colorFromHex("#fc8019"))),
                         border: OutlineInputBorder(
-                            borderRadius: BorderRadius.all(Radius.circular(5)),
-                            borderSide:
-                                BorderSide(width: 1.0, color: Colors.grey)),
+                            borderRadius: BorderRadius.all(Radius.circular(5)), borderSide: BorderSide(width: 1.0, color: Colors.grey)),
                         hintText: "Enter ContactNumber"),
                   )),
               Container(
@@ -107,10 +104,10 @@ class SignupPage extends State<Signup> {
                     decoration: InputDecoration(
                         labelText: 'Enter Email',
                         errorText: emailValidate ? errorEmailMsg : null,
+                        focusedBorder: OutlineInputBorder(
+                            borderRadius: BorderRadius.all(Radius.circular(5)), borderSide: BorderSide(width: 1.0, color: GlobalVariable.colorFromHex("#fc8019"))),
                         border: OutlineInputBorder(
-                            borderRadius: BorderRadius.all(Radius.circular(5)),
-                            borderSide:
-                                BorderSide(width: 1.0, color: Colors.grey)),
+                            borderRadius: BorderRadius.all(Radius.circular(5)), borderSide: BorderSide(width: 1.0, color: Colors.grey)),
                         hintText: "Enter Email"),
                   )),
               Container(
@@ -123,10 +120,10 @@ class SignupPage extends State<Signup> {
                     decoration: InputDecoration(
                         labelText: 'Enter State',
                         errorText: stateValidate ? 'Please enter state' : null,
+                        focusedBorder: OutlineInputBorder(
+                            borderRadius: BorderRadius.all(Radius.circular(5)), borderSide: BorderSide(width: 1.0, color: GlobalVariable.colorFromHex("#fc8019"))),
                         border: OutlineInputBorder(
-                            borderRadius: BorderRadius.all(Radius.circular(5)),
-                            borderSide:
-                                BorderSide(width: 1.0, color: Colors.grey)),
+                            borderRadius: BorderRadius.all(Radius.circular(5)), borderSide: BorderSide(width: 1.0, color: Colors.grey)),
                         hintText: "Enter State"),
                   )),
               Container(
@@ -139,17 +136,16 @@ class SignupPage extends State<Signup> {
                     decoration: InputDecoration(
                         labelText: 'Enter city',
                         errorText: cityValidate ? 'Please enter city' : null,
+                        focusedBorder: OutlineInputBorder(
+                            borderRadius: BorderRadius.all(Radius.circular(5)), borderSide: BorderSide(width: 1.0, color: GlobalVariable.colorFromHex("#fc8019"))),
                         border: OutlineInputBorder(
-                            borderRadius: BorderRadius.all(Radius.circular(5)),
-                            borderSide:
-                                BorderSide(width: 1.0, color: Colors.grey)),
+                            borderRadius: BorderRadius.all(Radius.circular(5)), borderSide: BorderSide(width: 1.0, color: Colors.grey)),
                         hintText: "Enter city"),
                   )),
               Container(
                   margin: EdgeInsets.only(bottom: 15),
                   child: TextField(
-                    keyboardType: TextInputType.numberWithOptions(
-                        signed: true, decimal: true),
+                    keyboardType: TextInputType.numberWithOptions(signed: true, decimal: true),
                     textInputAction: TextInputAction.done,
                     controller: pinCode,
                     onSubmitted: (_) => FocusScope.of(context).unfocus(),
@@ -157,10 +153,10 @@ class SignupPage extends State<Signup> {
                     decoration: InputDecoration(
                         labelText: 'Enter PinCode',
                         errorText: pinCodeValidate ? pinCodeMsg : null,
+                        focusedBorder: OutlineInputBorder(
+                            borderRadius: BorderRadius.all(Radius.circular(5)), borderSide: BorderSide(width: 1.0, color: GlobalVariable.colorFromHex("#fc8019"))),
                         border: OutlineInputBorder(
-                            borderRadius: BorderRadius.all(Radius.circular(5)),
-                            borderSide:
-                                BorderSide(width: 1.0, color: Colors.grey)),
+                            borderRadius: BorderRadius.all(Radius.circular(5)), borderSide: BorderSide(width: 1.0, color: Colors.grey)),
                         hintText: "Enter PinCode"),
                   )),
               SizedBox(
@@ -184,14 +180,12 @@ class SignupPage extends State<Signup> {
                               contactNumberValidate = true;
                               contactNumberMsg = "Please Enter ContactNumber";
                             } else {
-                              var contactValidate =
-                                  validatemobilenumber(contactNumber.text);
+                              var contactValidate = GlobalVariable.validatemobilenumber(contactNumber.text);
                               if (contactValidate == true) {
                                 contactNumberValidate = false;
                               } else {
                                 contactNumberValidate = true;
-                                contactNumberMsg =
-                                    "Please enter validate ContactNumber";
+                                contactNumberMsg = "Please enter validate ContactNumber";
                               }
                             }
                             if (emailField.text.isEmpty) {
@@ -238,12 +232,15 @@ class SignupPage extends State<Signup> {
                                 cityValidate == false &&
                                 pinCodeValidate == false) {
                               print("call api");
-                              Navigator.of(context).push(MaterialPageRoute(builder: (context) => Login(isComingSignUp: true,)));
+                              Navigator.of(context).push(MaterialPageRoute(
+                                  builder: (context) => Login(
+                                        isComingSignUp: true,
+                                      )));
                             }
                           })
                         },
                         child: Text("CONTINUE"),
-                        color: _colorFromHex("#fc8019"),
+                        color: GlobalVariable.colorFromHex("#fc8019"),
                       ))),
             ],
           ),
@@ -253,25 +250,11 @@ class SignupPage extends State<Signup> {
   }
 }
 
-Color _colorFromHex(String hexColor) {
-  final hexCode = hexColor.replaceAll('#', '');
-  return Color(int.parse('FF$hexCode', radix: 16));
-}
-
 bool validateEmail(String emailtext) {
-  final regexpemailvalid = RegExp(
-      "^([a-zA-Z0-9_\\-\\.]+)@((\\[[0-9]{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3}\\.)|(([a-zA-Z0-9\\-]+\\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})(\\]?)\$");
+  final regexpemailvalid =
+      RegExp("^([a-zA-Z0-9_\\-\\.]+)@((\\[[0-9]{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3}\\.)|(([a-zA-Z0-9\\-]+\\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})(\\]?)\$");
 
   if (emailtext.contains(regexpemailvalid)) {
-    return true;
-  }
-  return false;
-}
-
-bool validatemobilenumber(String mobiletext) {
-  final regexpmobilevalid = RegExp("^\\+(?:[0-9]●?){6,14}[0-9]\$");
-
-  if (mobiletext.contains(regexpmobilevalid)) {
     return true;
   }
   return false;
