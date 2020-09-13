@@ -26,51 +26,134 @@ class GlobalVariable {
   }
 
   static void showCurrentLocationDialog(BuildContext context, String urlStr, Function(String value) returnCall) async {
-    var pincodeController = TextEditingController();
-    await showDialog<String>(
+    var pincodeController = TextEditingController(text: urlStr);
+    bool pincodeValidateBool = true;
+    String pincodeErrorMsg;
+    await showDialog(
       context: context,
-      child: new AlertDialog(
-        contentPadding: const EdgeInsets.all(16.0),
-        content: Expanded(
-            child: Column(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            Container(margin: EdgeInsets.fromLTRB(0, 10, 0, 30), child: Text("Location Pincode",style: TextStyle(color: Colors.black,fontWeight: FontWeight.bold),)),
-            new TextField(
-              controller: pincodeController..text = urlStr,
-              autofocus: false,
-              onChanged: (String textTyped) {},
-              decoration: InputDecoration(
-                labelText: 'Pincode',
-                focusedBorder: OutlineInputBorder(
-                    borderRadius: BorderRadius.all(Radius.circular(5)),
-                    borderSide: BorderSide(width: 1.0, color: GlobalVariable.colorFromHex("#fc8019"))),
-                border:
-                    OutlineInputBorder(borderRadius: BorderRadius.all(Radius.circular(5)), borderSide: BorderSide(width: 1.0, color: Colors.grey)),
-              ),
-            ),
-          ],
-        )),
-        actions: <Widget>[
-          new FlatButton(
-              child: const Text('CANCEL'),
-              onPressed: () {
-                Navigator.pop(context);
-              }),
-          new FlatButton(
-              child: const Text('Done'),
-              onPressed: () {
-                if (!pincodeController.text.isEmpty && validatePincode(pincodeController.text)) {
-                  Navigator.pop(context);
-                  returnCall.call(pincodeController.text);
-                } else {
-                  toastMessage("Please enter valid pincode or getcurrent location");
-                }
-                // print(urlStr);
-              })
-        ],
-      ),
+      builder: (context) {
+        return StatefulBuilder(
+          builder: (context, setState) {
+            return AlertDialog(
+              title: Text("Location Pincode"),
+              content: Expanded(
+                  child: Column(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+//                  Container(
+//                      margin: EdgeInsets.fromLTRB(0, 10, 0, 30),
+//                      child: Text(
+//                        "Location Pincode",
+//                        style: TextStyle(color: Colors.black, fontWeight: FontWeight.bold),
+//                      )),
+                  new TextField(
+                    keyboardType: TextInputType.number,
+                    controller:pincodeController..selection = TextSelection.fromPosition(TextPosition(offset: pincodeController.text.length)),
+                    autofocus: false,
+                    onChanged: (String textTyped) {
+                      urlStr = textTyped;
+                    },
+                    decoration: InputDecoration(
+                      labelText: 'Pincode',
+                      errorText: pincodeValidateBool ? null : pincodeErrorMsg,
+                      focusedBorder: OutlineInputBorder(
+                          borderRadius: BorderRadius.all(Radius.circular(5)),
+                          borderSide: BorderSide(width: 1.0, color: GlobalVariable.colorFromHex("#fc8019"))),
+                      border: OutlineInputBorder(
+                          borderRadius: BorderRadius.all(Radius.circular(5)), borderSide: BorderSide(width: 1.0, color: Colors.grey)),
+                    ),
+                  ),
+                ],
+              )),
+              actions: <Widget>[
+                new FlatButton(
+                    child: const Text('CANCEL'),
+                    onPressed: () {
+                      Navigator.pop(context);
+                    }),
+                new FlatButton(
+                    child: const Text('Done'),
+                    onPressed: () {
+                      if (!pincodeController.text.isEmpty && validatePincode(pincodeController.text)) {
+                        Navigator.pop(context);
+                        returnCall.call(pincodeController.text);
+                      } else {
+                        setState(() {
+                          pincodeValidateBool = false;
+                          pincodeErrorMsg = "Please enter valid pincode";
+                        });
+                      }
+                      // print(urlStr);
+                    })
+              ],
+            );
+          },
+        );
+      },
     );
+
+//    showDialog<String>(
+//        context: context,
+//        builder: (context) {
+//          return StatefulBuilder(builder: (context, setState) {
+//            new AlertDialog(
+//              contentPadding: const EdgeInsets.all(16.0),
+//              content: Expanded(
+//                  child: Column(
+//                mainAxisSize: MainAxisSize.min,
+//                children: [
+//                  Container(
+//                      margin: EdgeInsets.fromLTRB(0, 10, 0, 30),
+//                      child: Text(
+//                        "Location Pincode",
+//                        style: TextStyle(color: Colors.black, fontWeight: FontWeight.bold),
+//                      )),
+//                  new TextField(
+//                    keyboardType: TextInputType.number,
+//                    controller: pincodeController..text = urlStr,
+//                    autofocus: false,
+//                    onChanged: (String textTyped) {
+////                  setState((){
+////                    pincodeValidateBool=false;
+////                    pincodeErrorMsg="Please enter valid pincode";
+////                  });
+//                    },
+//                    decoration: InputDecoration(
+//                      labelText: 'Pincode',
+//                      errorText: pincodeValidateBool ? null : pincodeErrorMsg,
+//                      focusedBorder: OutlineInputBorder(
+//                          borderRadius: BorderRadius.all(Radius.circular(5)),
+//                          borderSide: BorderSide(width: 1.0, color: GlobalVariable.colorFromHex("#fc8019"))),
+//                      border: OutlineInputBorder(
+//                          borderRadius: BorderRadius.all(Radius.circular(5)), borderSide: BorderSide(width: 1.0, color: Colors.grey)),
+//                    ),
+//                  ),
+//                ],
+//              )),
+//              actions: <Widget>[
+//                new FlatButton(
+//                    child: const Text('CANCEL'),
+//                    onPressed: () {
+//                      Navigator.pop(context);
+//                    }),
+//                new FlatButton(
+//                    child: const Text('Done'),
+//                    onPressed: () {
+//                      if (!pincodeController.text.isEmpty && validatePincode(pincodeController.text)) {
+//                        Navigator.pop(context);
+//                        returnCall.call(pincodeController.text);
+//                      } else {
+//                        setState(() {
+//                          pincodeValidateBool = false;
+//                          pincodeErrorMsg = "Please enter valid pincode or getcurrent location";
+//                        });
+//                      }
+//                      // print(urlStr);
+//                    })
+//              ],
+//            );
+//          });
+//        });
   }
 
   static void toastMessage(String message) {
