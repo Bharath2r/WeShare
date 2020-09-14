@@ -46,6 +46,7 @@ class SignupPage extends State<Signup> {
             // mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Container(
+                height: 50,
                   margin: EdgeInsets.only(bottom: 15, top: 10),
                   child: TextField(
                     keyboardType: TextInputType.text,
@@ -53,6 +54,7 @@ class SignupPage extends State<Signup> {
                     controller: firstName,
                     onSubmitted: (_) => FocusScope.of(context).nextFocus(),
                     decoration: InputDecoration(
+                        contentPadding: EdgeInsets.all(10.0),
                         labelText: 'Enter FirstName',
 //                        errorStyle: TextStyle(),
                         errorText: firstNameValidate ? 'Please enter firstname' : null,
@@ -60,9 +62,13 @@ class SignupPage extends State<Signup> {
                             borderRadius: BorderRadius.all(Radius.circular(5)), borderSide: BorderSide(width: 1.0, color: GlobalVariable.colorFromHex("#fc8019"))),
                         border: OutlineInputBorder(
                             borderRadius: BorderRadius.all(Radius.circular(5)), borderSide: BorderSide(width: 1.0, color: Colors.grey)),
-                        hintText: "Enter FirstName"),
+                        hintText: ""),
+                    style: TextStyle(
+                      fontSize: 18.0,
+                    ),
                   )),
               Container(
+                  height: 50,
                   margin: EdgeInsets.only(bottom: 15),
                   child: TextField(
                     keyboardType: TextInputType.text,
@@ -70,15 +76,20 @@ class SignupPage extends State<Signup> {
                     controller: lastName,
                     onSubmitted: (_) => FocusScope.of(context).nextFocus(),
                     decoration: InputDecoration(
+                        contentPadding: EdgeInsets.all(10.0),
                         labelText: 'Enter LastName',
                         errorText: lastNameValidate ? 'Please enter lastname' : null,
                         focusedBorder: OutlineInputBorder(
                             borderRadius: BorderRadius.all(Radius.circular(5)), borderSide: BorderSide(width: 1.0, color: GlobalVariable.colorFromHex("#fc8019"))),
                         border: OutlineInputBorder(
                             borderRadius: BorderRadius.all(Radius.circular(5)), borderSide: BorderSide(width: 1.0, color: Colors.grey)),
-                        hintText: "Enter LastName"),
+                        hintText: ""),
+                    style: TextStyle(
+                      fontSize: 18.0,
+                    ),
                   )),
               Container(
+                  height: 50,
                   margin: EdgeInsets.only(bottom: 15),
                   child: TextField(
                     keyboardType: TextInputType.numberWithOptions(signed: true, decimal: true),
@@ -86,15 +97,20 @@ class SignupPage extends State<Signup> {
                     controller: contactNumber,
                     onSubmitted: (_) => FocusScope.of(context).nextFocus(),
                     decoration: InputDecoration(
+                        contentPadding: EdgeInsets.all(10.0),
                         labelText: 'Enter ContactNumber',
                         errorText: contactNumberValidate ? contactNumberMsg : null,
                         focusedBorder: OutlineInputBorder(
                             borderRadius: BorderRadius.all(Radius.circular(5)), borderSide: BorderSide(width: 1.0, color: GlobalVariable.colorFromHex("#fc8019"))),
                         border: OutlineInputBorder(
                             borderRadius: BorderRadius.all(Radius.circular(5)), borderSide: BorderSide(width: 1.0, color: Colors.grey)),
-                        hintText: "Enter ContactNumber"),
+                        hintText: ""),
+                    style: TextStyle(
+                      fontSize: 18.0,
+                    ),
                   )),
               Container(
+                  height: 50,
                   margin: EdgeInsets.only(bottom: 15),
                   child: TextField(
                     keyboardType: TextInputType.emailAddress,
@@ -102,15 +118,20 @@ class SignupPage extends State<Signup> {
                     controller: emailField,
                     onSubmitted: (_) => FocusScope.of(context).nextFocus(),
                     decoration: InputDecoration(
+                        contentPadding: EdgeInsets.all(10.0),
                         labelText: 'Enter Email',
                         errorText: emailValidate ? errorEmailMsg : null,
                         focusedBorder: OutlineInputBorder(
                             borderRadius: BorderRadius.all(Radius.circular(5)), borderSide: BorderSide(width: 1.0, color: GlobalVariable.colorFromHex("#fc8019"))),
                         border: OutlineInputBorder(
                             borderRadius: BorderRadius.all(Radius.circular(5)), borderSide: BorderSide(width: 1.0, color: Colors.grey)),
-                        hintText: "Enter Email"),
+                        hintText: ""),
+                    style: TextStyle(
+                      fontSize: 18.0,
+                    ),
                   )),
               Container(
+                  height: 50,
                   margin: EdgeInsets.only(bottom: 15),
                   child: TextField(
                     keyboardType: TextInputType.text,
@@ -118,15 +139,20 @@ class SignupPage extends State<Signup> {
                     controller: state,
                     onSubmitted: (_) => FocusScope.of(context).nextFocus(),
                     decoration: InputDecoration(
+                        contentPadding: EdgeInsets.all(10.0),
                         labelText: 'Enter State',
                         errorText: stateValidate ? 'Please enter state' : null,
                         focusedBorder: OutlineInputBorder(
                             borderRadius: BorderRadius.all(Radius.circular(5)), borderSide: BorderSide(width: 1.0, color: GlobalVariable.colorFromHex("#fc8019"))),
                         border: OutlineInputBorder(
                             borderRadius: BorderRadius.all(Radius.circular(5)), borderSide: BorderSide(width: 1.0, color: Colors.grey)),
-                        hintText: "Enter State"),
+                        hintText: ""),
+                    style: TextStyle(
+                      fontSize: 18.0,
+                    ),
                   )),
               Container(
+                  height: 50,
                   margin: EdgeInsets.only(bottom: 15),
                   child: TextField(
                     keyboardType: TextInputType.text,
@@ -134,15 +160,20 @@ class SignupPage extends State<Signup> {
                     controller: city,
                     onSubmitted: (_) => FocusScope.of(context).nextFocus(),
                     decoration: InputDecoration(
+                        contentPadding: EdgeInsets.all(10.0),
                         labelText: 'Enter city',
                         errorText: cityValidate ? 'Please enter city' : null,
                         focusedBorder: OutlineInputBorder(
                             borderRadius: BorderRadius.all(Radius.circular(5)), borderSide: BorderSide(width: 1.0, color: GlobalVariable.colorFromHex("#fc8019"))),
                         border: OutlineInputBorder(
                             borderRadius: BorderRadius.all(Radius.circular(5)), borderSide: BorderSide(width: 1.0, color: Colors.grey)),
-                        hintText: "Enter city"),
+                        hintText: ""),
+                    style: TextStyle(
+                      fontSize: 18.0,
+                    ),
                   )),
               Container(
+                  height: 50,
                   margin: EdgeInsets.only(bottom: 15),
                   child: TextField(
                     keyboardType: TextInputType.numberWithOptions(signed: true, decimal: true),
@@ -151,18 +182,22 @@ class SignupPage extends State<Signup> {
                     onSubmitted: (_) => FocusScope.of(context).unfocus(),
                     // submit and hide keyboard
                     decoration: InputDecoration(
+                        contentPadding: EdgeInsets.all(10.0),
                         labelText: 'Enter PinCode',
                         errorText: pinCodeValidate ? pinCodeMsg : null,
                         focusedBorder: OutlineInputBorder(
                             borderRadius: BorderRadius.all(Radius.circular(5)), borderSide: BorderSide(width: 1.0, color: GlobalVariable.colorFromHex("#fc8019"))),
                         border: OutlineInputBorder(
                             borderRadius: BorderRadius.all(Radius.circular(5)), borderSide: BorderSide(width: 1.0, color: Colors.grey)),
-                        hintText: "Enter PinCode"),
+                        hintText: ""),
+                    style: TextStyle(
+                      fontSize: 18.0,
+                    ),
                   )),
               SizedBox(
                   width: 200,
                   child: Container(
-                      margin: EdgeInsets.only(top: 35),
+                      margin: EdgeInsets.only(top: 20),
                       child: RaisedButton(
                         onPressed: () => {
                           setState(() {

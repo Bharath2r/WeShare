@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:weshare/GlobalVariable.dart';
 
+import 'Profile.dart';
 import 'main.dart';
 
 class Home extends StatefulWidget {
@@ -20,7 +21,7 @@ class HomePage extends State<Home> {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          title: Text("Login"),
+          title: Text("Home"),
           backgroundColor: GlobalVariable.colorFromHex("#fc8019"),
           actions: <Widget>[
             Padding(
@@ -90,7 +91,9 @@ class HomePage extends State<Home> {
                 ),
               ),
               CustomListTile(Icons.home, "Home", () => {}),
-              CustomListTile(Icons.person, "Profile", () => {}),
+              CustomListTile(Icons.person, "Profile", () => {
+                Navigator.of(context).push(MaterialPageRoute(builder: (context) => Profile()))
+              }),
               CustomListTile(Icons.lock_open, "Logout",
                   () => {Navigator.of(context).pushAndRemoveUntil(MaterialPageRoute(builder: (context) => App()), (Route<dynamic> route) => false)})
             ],
