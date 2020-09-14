@@ -16,6 +16,7 @@ class App extends StatelessWidget {
       theme: ThemeData(
           primaryColor: Colors.white,
           inputDecorationTheme: const InputDecorationTheme(
+           focusedBorder: UnderlineInputBorder(borderSide: BorderSide(color: Colors.grey)),
             labelStyle: TextStyle(color: Colors.black),
             hintStyle: TextStyle(color: Colors.grey),
           )),
