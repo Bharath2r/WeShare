@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:keyboard_actions/keyboard_actions.dart';
 import 'package:weshare/GlobalVariable.dart';
 import 'package:weshare/HomeScreen.dart';
 
@@ -13,6 +14,10 @@ class Login extends StatefulWidget {
 }
 
 class LoginPage extends State<Login> {
+  final FocusNode _nodeText1 = FocusNode();
+  final FocusNode _nodeText2 = FocusNode();
+  final FocusNode _nodeText3 = FocusNode();
+
   var verifyFieldButtonVisiblity = false;
   var loginButtonVisiblity = true;
   bool isComingSignUp;
@@ -27,7 +32,47 @@ class LoginPage extends State<Login> {
   TextEditingController otpController = new TextEditingController();
 
   LoginPage({this.isComingSignUp});
-
+  KeyboardActionsConfig _buildConfig(BuildContext context) {
+    return KeyboardActionsConfig(
+      keyboardActionsPlatform: KeyboardActionsPlatform.ALL,
+      keyboardBarColor: Colors.grey[200],
+      nextFocus: true,
+      actions: [
+        KeyboardActionsItem(
+          focusNode: _nodeText1,
+        ),
+        KeyboardActionsItem(focusNode: _nodeText2, toolbarButtons: [
+              (node) {
+            return GestureDetector(
+              onTap: () => node.unfocus(),
+              child: Padding(
+                padding: EdgeInsets.all(8.0),
+                child: Icon(Icons.close),
+              ),
+            );
+          }
+        ]),
+        KeyboardActionsItem(
+          focusNode: _nodeText3,
+          onTapAction: () {
+            showDialog(
+                context: context,
+                builder: (context) {
+                  return AlertDialog(
+                    content: Text("Custom Action"),
+                    actions: <Widget>[
+                      FlatButton(
+                        child: Text("OK"),
+                        onPressed: () => Navigator.of(context).pop(),
+                      )
+                    ],
+                  );
+                });
+          },
+        ),
+      ],
+    );
+  }
   @override
   Widget build(BuildContext context) {
     return WillPopScope(
@@ -79,6 +124,7 @@ class LoginPage extends State<Login> {
                         margin: EdgeInsets.fromLTRB(15.0,0, 15.0,5.0),
                         child: TextField(
                           enabled: loginButtonVisiblity,
+                          focusNode: _nodeText3,
                           keyboardType: TextInputType.phone,
                           controller: mobileController,
                           onTap: () => {
@@ -100,8 +146,9 @@ class LoginPage extends State<Login> {
                         child: Container(
                             margin: EdgeInsets.fromLTRB(15.0,5.0, 15.0,0),
                             child: TextField(
-                              keyboardType: TextInputType.number,
+                              keyboardType: TextInputType.numberWithOptions(signed: true, decimal: true),
                               controller: otpController,
+                              textInputAction: TextInputAction.done ,
                               onTap: () => {
                                 setState(() {
                                   otpValidateBool = true;
