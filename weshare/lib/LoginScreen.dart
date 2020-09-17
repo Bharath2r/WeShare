@@ -54,21 +54,6 @@ class LoginPage extends State<Login> {
         ]),
         KeyboardActionsItem(
           focusNode: _nodeText3,
-          onTapAction: () {
-            showDialog(
-                context: context,
-                builder: (context) {
-                  return AlertDialog(
-                    content: Text("Custom Action"),
-                    actions: <Widget>[
-                      FlatButton(
-                        child: Text("OK"),
-                        onPressed: () => Navigator.of(context).pop(),
-                      )
-                    ],
-                  );
-                });
-          },
         ),
       ],
     );
@@ -91,7 +76,9 @@ class LoginPage extends State<Login> {
               title: Text("Login"),
               backgroundColor: GlobalVariable.colorFromHex("#fc8019"),
             ),
-            body: Container(
+            body: KeyboardActions(
+    config: _buildConfig(context),
+    child: Container(
                 child: Column(children: <Widget>[
               Container(
                 margin: EdgeInsets.fromLTRB(0, 80, 0, 130),
@@ -222,7 +209,7 @@ class LoginPage extends State<Login> {
                 ),
               ))
             ])) // This trailing comma makes auto-formatting nicer for build methods.
-            ));
+            )));
   }
 
   Future<bool> _onWillPop() async {

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:weshare/GlobalVariable.dart';
+import 'package:keyboard_actions/keyboard_actions.dart';
 
 import 'LoginScreen.dart';
 
@@ -30,6 +31,7 @@ class SignupPage extends State<Signup> {
   bool stateValidate = false;
   bool cityValidate = false;
   bool pinCodeValidate = false;
+  final FocusNode _nodeText3 = FocusNode();
 
   var stateDropdownValue;
   var statesList = <String>[
@@ -70,7 +72,18 @@ class SignupPage extends State<Signup> {
     'Lakshadweep',
     'Puducherry'
   ];
-
+  KeyboardActionsConfig _buildConfig(BuildContext context) {
+    return KeyboardActionsConfig(
+      keyboardActionsPlatform: KeyboardActionsPlatform.ALL,
+      keyboardBarColor: Colors.grey[200],
+      nextFocus: true,
+      actions: [
+        KeyboardActionsItem(
+          focusNode: _nodeText3,
+        ),
+      ],
+    );
+  }
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -131,7 +144,8 @@ class SignupPage extends State<Signup> {
               Container(
                   margin: EdgeInsets.only(bottom: 15),
                   child: TextField(
-                    keyboardType: TextInputType.numberWithOptions(signed: true, decimal: true),
+                    keyboardType: TextInputType.phone,
+                    focusNode: _nodeText3,
                     textInputAction: TextInputAction.next,
                     controller: contactNumber,
                     onSubmitted: (_) => FocusScope.of(context).nextFocus(),
